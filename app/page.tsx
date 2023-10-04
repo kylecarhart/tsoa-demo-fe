@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Item, ItemsApi } from "../@generated/src";
 import styles from "./page.module.css";
+import ItemCard from "../components/Item/ItemCard";
 
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
@@ -19,7 +20,7 @@ export default function Home() {
       </button>
       <div>
         {items.map((item) => (
-          <div key={item.id}>{item.id}</div>
+          <ItemCard key={item.id} item={item} />
         ))}
       </div>
     </main>
