@@ -2,4 +2,39 @@
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 0.2rem;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.cardData {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemData {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 700;
+  margin: 0 0 0.2rem 0;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 0.5rem 0;
+}
+
+.price {
+  margin: 0 0 1rem 0;
+}
+
+.cardButton {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
 }

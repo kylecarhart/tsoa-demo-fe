@@ -1,11 +1,16 @@
 "use client";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Item, ItemsApi, OrdersApi } from "../@generated/src";
-import styles from "./page.module.css";
 import ItemCard from "../components/Item/ItemCard";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { setOrders } from "../redux/slices/orderSlice";
 import { clear } from "../redux/slices/cartSlice";
+import { setOrders } from "../redux/slices/orderSlice";
+import { handleApiErrorResponse } from "../utils/handleApiErrorResponse";
+import styles from "./page.module.css";
+import Button from "../components/Button/Button";
+import { LuPlusSquare, LuShoppingBag } from "react-icons/lu";
 
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
@@ -14,26 +19,38 @@ export default function Home() {
 
   async function handleCheckout() {
     const ordersApi = new OrdersApi();
-    const order = await ordersApi.createOrder({ orderRequest: cart });
-    if (order) {
+    try {
+      const order = await ordersApi.createOrder({ orderRequest: cart });
       const orders = await ordersApi.getAllOrders();
+
       dispatch(clear());
       dispatch(setOrders(orders));
+
+      toast.success(`Order placed! Id: ${order.id}`);
+    } catch (e) {
+      const error = await handleApiErrorResponse(e);
+      toast.error(error.message);
     }
   }
 
+  useEffect(() => {
+    async function getItems() {
+      try {
+        const items = await new ItemsApi().getAllItems();
+        setItems(items);
+      } catch (e) {
+        const error = await handleApiErrorResponse(e);
+        toast.error(error.message);
+      }
+    }
+
+    getItems();
+  }, []);
+
   return (
     <main>
-      <button
-        onClick={() => {
-          new ItemsApi().getAllItems().then((items) => {
-            setItems(items);
-          });
-        }}
-      >
-        Test button click
-      </button>
-      <div>
+      <h1>Items</h1>
+      <div className={styles.itemContainer}>
         {items.map((item) => (
           <ItemCard key={item.id} item={item} />
         ))}
@@ -52,7 +69,11 @@ export default function Home() {
           <div>${cart.total}</div>
         </div>
       </div>
-      <button onClick={() => handleCheckout()}>Order</button>
+      <Button
+        text="Order"
+        icon={<LuShoppingBag />}
+        onClick={() => handleCheckout()}
+      />
     </main>
   );
 }

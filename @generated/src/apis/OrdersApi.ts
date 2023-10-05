@@ -15,10 +15,13 @@
 
 import * as runtime from '../runtime';
 import type {
+  ErrorResponse,
   Order,
   OrderRequest,
 } from '../models/index';
 import {
+    ErrorResponseFromJSON,
+    ErrorResponseToJSON,
     OrderFromJSON,
     OrderToJSON,
     OrderRequestFromJSON,
