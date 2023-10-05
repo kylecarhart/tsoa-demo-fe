@@ -28,6 +28,12 @@ import {
 export interface OrderRequest {
     /**
      * 
+     * @type {number}
+     * @memberof OrderRequest
+     */
+    total: number;
+    /**
+     * 
      * @type {Array<OrderItem>}
      * @memberof OrderRequest
      */
@@ -39,6 +45,7 @@ export interface OrderRequest {
  */
 export function instanceOfOrderRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "total" in value;
     isInstance = isInstance && "items" in value;
 
     return isInstance;
@@ -54,6 +61,7 @@ export function OrderRequestFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     return {
         
+        'total': json['total'],
         'items': ((json['items'] as Array<any>).map(OrderItemFromJSON)),
     };
 }
@@ -67,6 +75,7 @@ export function OrderRequestToJSON(value?: OrderRequest | null): any {
     }
     return {
         
+        'total': value.total,
         'items': ((value.items as Array<any>).map(OrderItemToJSON)),
     };
 }

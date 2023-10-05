@@ -32,10 +32,7 @@ export const cartSlice = createSlice({
       }
 
       // Update the total
-      state.total = state.items.reduce(
-        (acc, item) => acc + item.item.price * item.quantity,
-        0
-      );
+      state.total = totalCart(state.items);
     },
     removeItem: (state, action: PayloadAction<Item>) => {
       const itemToFind = state.items.find(
@@ -54,15 +51,25 @@ export const cartSlice = createSlice({
       }
 
       // Update the total
-      state.total = state.items.reduce(
-        (acc, item) => acc + item.item.price * item.quantity,
-        0
-      );
+      state.total = totalCart(state.items);
+    },
+    clear: (state) => {
+      state.items = [];
+      state.total = 0;
     },
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+/**
+ * Total the cart items.
+ * @param items Order Items
+ * @returns The cart total
+ */
+function totalCart(items: OrderItem[]) {
+  return items.reduce((acc, item) => acc + item.item.price * item.quantity, 0);
+}
+
+export const { addItem, removeItem, clear } = cartSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectItems = (state: RootState) => state.cart.items;
