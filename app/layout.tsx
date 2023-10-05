@@ -1,4 +1,6 @@
 import "./globals.css";
+import "normalize.css/normalize.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import StoreProvider from "../redux/StoreProvider";

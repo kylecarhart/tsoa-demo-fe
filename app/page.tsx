@@ -48,7 +48,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <main className={styles.main}>
       <h1>Items</h1>
       <div className={styles.itemContainer}>
         {items.map((item) => (
