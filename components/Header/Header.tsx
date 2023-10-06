@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { LuShoppingBag } from "react-icons/lu";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { open, selectQuantity } from "../../redux/slices/cartSlice";
+import { selectQuantity } from "../../redux/slices/cartSlice";
 import Placeholder from "../Placeholder/Placeholder";
 import styles from "./Header.module.css";
+import { openCart } from "../../redux/slices/layoutSlice";
 
 interface Props {}
 
@@ -14,7 +15,7 @@ export default function Header({}: Props) {
   const dispatch = useAppDispatch();
 
   function handleOpenCart() {
-    dispatch(open());
+    dispatch(openCart());
   }
 
   return (

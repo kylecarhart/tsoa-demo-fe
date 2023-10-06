@@ -5,11 +5,12 @@
   top: 0;
   bottom: 0;
   right: calc(0rem - var(--width));
+  display: flex;
+  flex-direction: column;
   width: var(--width);
   background-color: white;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
   padding: 1rem;
-
   transition: right cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.5s;
 
   &.isOpen {
@@ -27,4 +28,10 @@
   color: #000;
   margin: 1rem;
   padding: 0;
+}
+
+.orderButton {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
 }

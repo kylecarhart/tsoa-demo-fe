@@ -1,13 +1,13 @@
-import "./globals.css";
 import "normalize.css/normalize.css";
+import "./globals.css";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import StoreProvider from "../redux/StoreProvider";
 import { Toaster } from "react-hot-toast";
-import Header from "../components/Header/Header";
-import styles from "./layout.module.css";
 import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
+import StoreProvider from "../redux/StoreProvider";
+import styles from "./layout.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,17 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <StoreProvider>
           <div className={styles.app}>
             <Header />
             <main className={styles.main}>{children}</main>
             <Footer />
           </div>
           <Toaster />
-        </body>
-      </html>
-    </StoreProvider>
+        </StoreProvider>
+      </body>
+    </html>
   );
 }

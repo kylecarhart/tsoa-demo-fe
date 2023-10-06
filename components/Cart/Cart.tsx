@@ -1,19 +1,20 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import Button from "../Button/Button";
-import { LuPanelRightClose, LuShoppingBag, LuX } from "react-icons/lu";
-import { OrdersApi } from "../../@generated/src";
-import { clear, close } from "../../redux/slices/cartSlice";
-import { setOrders } from "../../redux/slices/orderSlice";
-import toast from "react-hot-toast";
-import { handleApiErrorResponse } from "../../utils/handleApiErrorResponse";
-import styles from "./Cart.module.css";
 import clsx from "clsx";
+import toast from "react-hot-toast";
+import { LuCheckCircle, LuX } from "react-icons/lu";
+import { OrdersApi } from "../../@generated/src";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setOrders } from "../../redux/slices/orderSlice";
+import { handleApiErrorResponse } from "../../utils/handleApiErrorResponse";
+import Button from "../Button/Button";
+import styles from "./Cart.module.css";
+import { clear } from "../../redux/slices/cartSlice";
+import { closeCart } from "../../redux/slices/layoutSlice";
 
 type Props = {};
 
 export default function Cart({}: Props) {
   const cart = useAppSelector((state) => state.cart);
+  const layout = useAppSelector((state) => state.layout);
   const dispatch = useAppDispatch();
 
   async function handleCheckout() {
@@ -32,13 +33,13 @@ export default function Cart({}: Props) {
     }
   }
 
-  const cartClasses = clsx(styles.cart, {
-    [styles.isOpen]: cart.isOpen,
-  });
-
   function handleCartClose() {
-    dispatch(close());
+    dispatch(closeCart());
   }
+
+  const cartClasses = clsx(styles.cart, {
+    [styles.isOpen]: layout.isCartOpen,
+  });
 
   return (
     <aside className={cartClasses}>
@@ -54,14 +55,19 @@ export default function Cart({}: Props) {
               </div>
             );
           })}
-          <div>${cart.total}</div>
+          <div>
+            <div>Subtotal</div>
+            <div>${cart.total}</div>
+          </div>
         </div>
       </div>
-      <Button
-        text="Order"
-        icon={<LuShoppingBag />}
-        onClick={() => handleCheckout()}
-      />
+      <div className={styles.orderButton}>
+        <Button
+          text="Order"
+          icon={<LuCheckCircle />}
+          onClick={() => handleCheckout()}
+        />
+      </div>
     </aside>
   );
 }
