@@ -12,6 +12,7 @@
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.7.0",
     "@reduxjs/toolkit": "^1.9.6",
+    "clsx": "^2.0.0",
     "next": "latest",
     "normalize.css": "^8.0.1",
     "react": "latest",

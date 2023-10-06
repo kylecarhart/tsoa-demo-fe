@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { LuPlusSquare } from "react-icons/lu";
 import { Item } from "../../@generated/src";
 import { useAppDispatch } from "../../redux/hooks";
@@ -13,7 +14,12 @@ interface Props {
 export default function ItemCard({ item }: Props) {
   const dispatch = useAppDispatch();
 
-  const { id, name, description, price } = item;
+  function handleAddToCart() {
+    dispatch(addItem(item));
+    toast.success(`${item.name} added to your bag!`);
+  }
+
+  const { name, description, price } = item;
   return (
     <div className={styles.card}>
       <Placeholder width={100} height={100} />
@@ -25,9 +31,7 @@ export default function ItemCard({ item }: Props) {
         </div>
         <div className={styles.cardButton}>
           <Button
-            onClick={() => {
-              dispatch(addItem(item));
-            }}
+            onClick={handleAddToCart}
             icon={<LuPlusSquare />}
             text="Add to cart"
           />

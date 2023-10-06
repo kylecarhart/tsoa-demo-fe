@@ -1,0 +1,30 @@
+.cart {
+  --width: 20rem;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: calc(0rem - var(--width));
+  width: var(--width);
+  background-color: white;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+
+  transition: right cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.5s;
+
+  &.isOpen {
+    right: 0;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 2rem;
+  color: #000;
+  margin: 1rem;
+  padding: 0;
+}

@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import StoreProvider from "../redux/StoreProvider";
 import { Toaster } from "react-hot-toast";
+import Header from "../components/Header/Header";
+import styles from "./layout.module.css";
+import Footer from "../components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +25,11 @@ export default function RootLayout({
     <StoreProvider>
       <html lang="en">
         <body className={inter.className}>
-          {children}
+          <div className={styles.app}>
+            <Header />
+            <main className={styles.main}>{children}</main>
+            <Footer />
+          </div>
           <Toaster />
         </body>
       </html>

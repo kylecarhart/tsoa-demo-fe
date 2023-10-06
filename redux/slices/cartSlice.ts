@@ -7,12 +7,14 @@ import { Item, OrderItem } from "../../@generated/src";
 interface CartState {
   items: OrderItem[];
   total: number;
+  isOpen: boolean;
 }
 
 // Define the initial state using that type
 const initialState: CartState = {
   items: [],
   total: 0,
+  isOpen: false,
 };
 
 export const cartSlice = createSlice({
@@ -57,6 +59,12 @@ export const cartSlice = createSlice({
       state.items = [];
       state.total = 0;
     },
+    open: (state) => {
+      state.isOpen = true;
+    },
+    close: (state) => {
+      state.isOpen = false;
+    },
   },
 });
 
@@ -69,10 +77,13 @@ function totalCart(items: OrderItem[]) {
   return items.reduce((acc, item) => acc + item.item.price * item.quantity, 0);
 }
 
-export const { addItem, removeItem, clear } = cartSlice.actions;
+export const { addItem, removeItem, clear, open, close } = cartSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectItems = (state: RootState) => state.cart.items;
 export const selectTotal = (state: RootState) => state.cart.total;
+export const selectIsOpen = (state: RootState) => state.cart.isOpen;
+export const selectQuantity = (state: RootState) =>
+  state.cart.items.reduce((acc, item) => acc + item.quantity, 0);
 
 export default cartSlice.reducer;

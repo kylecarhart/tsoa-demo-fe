@@ -1,0 +1,45 @@
+.header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  padding: 1rem 3rem;
+}
+
+.link {
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+.logo {
+  margin-right: 2rem;
+}
+
+.nav {
+  flex: 1;
+}
+
+.bag {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 0;
+}
+
+.quantityCircle {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  background-color: #8f00ee;
+  bottom: -30%;
+  right: -30%;
+}
