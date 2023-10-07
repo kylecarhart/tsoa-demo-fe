@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   padding: 1rem 3rem;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .link {
