@@ -8,6 +8,7 @@ import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import StoreProvider from "../redux/StoreProvider";
 import styles from "./layout.module.css";
+import Cart from "../components/Cart/Cart";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           <div className={styles.app}>
             <Header />
             <main className={styles.main}>{children}</main>
+            <Cart />
             <Footer />
           </div>
           <Toaster />

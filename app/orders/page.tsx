@@ -25,7 +25,6 @@ export default function Orders() {
 
   return (
     <div>
-      <h1>Hello, Next.js!</h1>
       {orders.map((order) => (
         <div key={order.id} className={styles.order}>
           <div>{order.id}</div>
