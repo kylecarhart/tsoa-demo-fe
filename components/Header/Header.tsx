@@ -31,7 +31,12 @@ export default function Header({}: Props) {
       </nav>
       <button onClick={handleOpenCart} className={styles.bag}>
         <LuShoppingBag size={32} />
-        <div className={styles.quantityCircle}>{quantity}</div>
+        {quantity > 0 && (
+          // Key added to force re-render when quantity changes
+          <div key={quantity} className={styles.quantityCircle}>
+            {quantity}
+          </div>
+        )}
       </button>
     </header>
   );

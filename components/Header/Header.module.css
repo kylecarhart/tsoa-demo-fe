@@ -42,4 +42,19 @@
   background-color: #8f00ee;
   bottom: -30%;
   right: -30%;
+  animation: pop 0.3s ease-in-out;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
