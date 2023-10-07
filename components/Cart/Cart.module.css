@@ -37,3 +37,17 @@
   display: flex;
   flex-direction: column;
 }
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.itemName {
+  font-weight: 700;
+}
+
+.subTotal {
+  font-weight: 700;
+}

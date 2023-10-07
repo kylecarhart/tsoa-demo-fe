@@ -52,19 +52,25 @@ export default function Cart({}: Props) {
     <aside className={cartClasses}>
       <LuX onClick={handleCartClose} className={styles.closeButton} size={24} />
       <div>
-        <div>Cart</div>
+        <h2>My Cart</h2>
         <div>
           {cart.items.map((orderItem) => {
             return (
-              <div key={orderItem.item.id}>
-                <div>{orderItem.item.name}</div>
-                <div>{orderItem.quantity}</div>
+              <div key={orderItem.item.id} className={styles.item}>
+                <div>
+                  <div className={styles.itemName}>{orderItem.item.name}</div>
+                  <div>Quantity: {orderItem.quantity}</div>
+                  <div>Price: ${orderItem.item.price.toFixed(2)}</div>
+                </div>
+                <div>
+                  ${(orderItem.item.price * orderItem.quantity).toFixed(2)}
+                </div>
               </div>
             );
           })}
-          <div>
-            <div>Subtotal</div>
-            <div>${cart.total}</div>
+          <div className={styles.item}>
+            <div className={styles.subTotal}>Subtotal:</div>
+            <div>${cart.total.toFixed(2)}</div>
           </div>
         </div>
       </div>
