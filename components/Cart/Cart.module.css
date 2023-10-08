@@ -2,7 +2,7 @@
   --width: 20rem;
   --off-screen-x: calc(-1rem - var(--width));
 
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: var(--off-screen-x);
