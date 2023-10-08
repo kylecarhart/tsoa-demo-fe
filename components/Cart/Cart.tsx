@@ -11,6 +11,8 @@ import { closeCart } from "../../redux/slices/layoutSlice";
 import { handleApiErrorResponse } from "../../utils/handleApiErrorResponse";
 import Button from "../Button/Button";
 import styles from "./Cart.module.css";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { useRef } from "react";
 
 interface Props {}
 
@@ -19,6 +21,11 @@ export default function Cart({}: Props) {
   const cart = useAppSelector((state) => state.cart);
   const layout = useAppSelector((state) => state.layout);
   const quantity = useAppSelector(selectQuantity);
+  const ref = useRef(null);
+
+  // useOutsideClick(ref, () => {
+  //   dispatch(closeCart());
+  // });
 
   const { data, error, mutateAsync, isLoading } = useMutation({
     mutationFn: () => new OrdersApi().createOrder({ orderRequest: cart }),
@@ -47,7 +54,7 @@ export default function Cart({}: Props) {
   });
 
   return (
-    <aside className={cartClasses}>
+    <aside className={cartClasses} ref={ref}>
       <LuX onClick={handleCartClose} className={styles.closeButton} size={24} />
       <div>
         <h2>My Cart</h2>
