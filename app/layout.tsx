@@ -6,7 +6,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
-import StoreProvider from "../redux/StoreProvider";
+import Providers from "../providers/Providers";
 import styles from "./layout.module.css";
 import Cart from "../components/Cart/Cart";
 
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StoreProvider>
+        <Providers>
           <div className={styles.app}>
             <Header />
             <main className={styles.main}>{children}</main>
@@ -33,7 +33,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <Toaster />
-        </StoreProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -1,31 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Order, OrdersApi } from "../../@generated/src";
-import { handleApiErrorResponse } from "../../utils/handleApiErrorResponse";
-import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import { OrdersApi } from "../../@generated/src";
 import styles from "./page.module.css";
 
 export default function Orders() {
-  const [orders, setOrders] = useState<Order[]>([]);
-
-  useEffect(() => {
-    async function getItems() {
-      try {
-        const orders = await new OrdersApi().getAllOrders();
-        setOrders(orders);
-      } catch (e) {
-        const error = await handleApiErrorResponse(e);
-        toast.error(error.message);
-      }
-    }
-
-    getItems();
-  }, []);
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["orders"],
+    queryFn: () => new OrdersApi().getAllOrders(),
+  });
 
   return (
     <div>
-      {orders.map((order) => (
+      {data?.map((order) => (
         <div key={order.id} className={styles.order}>
           <div>{order.id}</div>
           <div>
