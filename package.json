@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-tsoa-fe",
+  "name": "tsoa-demo-fe",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen": "openapi-generator-cli generate -i ../nextjs-tsoa-be/src/tsoa/swagger.json -g typescript-fetch -o @generated -c .openapi-generator"
+    "gen": "openapi-generator-cli generate -i ../tsoa-demo-be/src/tsoa/swagger.json -g typescript-fetch -o @generated -c .openapi-generator"
   },
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.7.0",
